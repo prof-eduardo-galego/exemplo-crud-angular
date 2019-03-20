@@ -1,0 +1,46 @@
+<div class="page-header text-center">
+	<h1 class="text-center">Exemplo CRUD Angular</h1>
+</div>
+
+<p ng-show="mensagem.length" class="alert alert-info">
+	{{mensagem}}
+</p>
+
+<div class="row">
+	<div class="col-md-12">
+		<form>
+			<div class="input-group">				
+				<input class="form-control" placeholder="filtrar pelo nome do aluno" 
+					ng-model="filtro" ng-model-options="{ debounce: 500 }">
+				<span class="input-group-btn">
+					<a href="/alunos/new" class="btn btn-primary" type="button">
+						Novo aluno
+					</a>
+				</span>
+		</form>
+	</div>
+</div>
+
+<div class="row">
+	<table class="table table-condensed">
+		<thead>
+			<tr>
+				<th>Ordem</th>
+				<th>Nome</th>
+				<th>Telefone</th>
+				<th>Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="aluno in alunos | filter: filtro">
+				<td>{{ $index + 1 }}</td>
+				<td>{{aluno.nome}}</td>
+				<td>{{aluno.telefone}}</td>        
+				<td>
+					<a class="btn btn-primary" href="/alunos/edit/{{aluno._id}}">Editar</a>
+					<button class="btn btn-danger" ng-click="remover(aluno)">Remover</button>					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
